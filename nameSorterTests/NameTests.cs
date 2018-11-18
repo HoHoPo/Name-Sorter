@@ -18,8 +18,32 @@ namespace nameSorterTests
             Name testName = new Name("test", new string[] { "tests" });
             testName = new Name("test", new string[] { "tests", "tests" });
             testName = new Name("test", new string[] { "tests","tests","tests" });
-
         }
+
+        /// <summary>
+        /// testing converting from string to name
+        /// </summary>
+        [TestMethod]
+        public void ImportStringTest()
+        {
+            Name testName = new Name("given1 lastName");
+            Assert.AreEqual(testName.GivenNames[0], "given1", "given1 incorrect");
+            Assert.AreEqual(testName.LastName, "lastName", "Last Name incorrect");
+        }
+
+        /// <summary>
+        /// extra testing converting from string to name
+        /// </summary>
+        [TestMethod]
+        public void ImportStringTest2()
+        {
+            Name testName = new Name("given1 given2 given3 lastName");
+            Assert.AreEqual(testName.GivenNames[0], "given1", "given1 incorrect");
+            Assert.AreEqual(testName.GivenNames[1], "given2", "given2 incorrect");
+            Assert.AreEqual(testName.GivenNames[2], "given3", "given3 incorrect");
+            Assert.AreEqual(testName.LastName, "lastName", "Last Name incorrect");
+        }
+
 
         /// <summary>
         /// test case for too many givenNames Provided
@@ -134,6 +158,16 @@ namespace nameSorterTests
             Assert.AreEqual("Alvarez",nameList[0].LastName);
             Assert.AreEqual("Parson", nameList[1].LastName );
             Assert.AreEqual("Conner", nameList[3].GivenNames[1]);
+        }
+
+        /// <summary>
+        /// Testing ToString functionality 
+        /// </summary>
+        [TestMethod]
+        public void ToStringTest() {
+
+            Name testName =  new Name("Ritter", new string[] { "Frankie", "Alivn" });
+            Assert.AreEqual(testName.ToString(), "Frankie Alivn Ritter");
         }
 
     }

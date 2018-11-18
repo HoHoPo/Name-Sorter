@@ -38,6 +38,27 @@ namespace NameSorter
         }
 
         /// <summary>
+        /// Create a new Name based of a string
+        /// </summary>
+        /// <param name="fullName"> A string with space seperated parts, in order givenNames, LastName </param>
+        public Name(string fullName)
+        {
+            string[] splitNames = fullName.Split(' ');
+            string[] possGivenNames = new string[splitNames.Length-1];
+            Array.Copy(splitNames, possGivenNames, splitNames.Length - 1);
+            if (VaildGivenNames(possGivenNames))
+            {
+                this.GivenNames = possGivenNames;
+                this.LastName = splitNames[splitNames.Length - 1];
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("givenNames", "givenNames must be between " + minGivenNames + " and" + maxGivenNames);
+
+            }
+        }
+
+        /// <summary>
         /// Change the LastName
         /// </summary>
         /// <param name="newLastName">The new last name to be assigned</param>
@@ -103,6 +124,20 @@ namespace NameSorter
             if (result != 0) return result;
 
             return result; //Same (baseCase)
+        }
+
+        /// <summary>
+        /// Returns the name in string format
+        /// </summary>
+        /// <returns>Given names followed by LastName</returns>
+        public override string ToString()
+        {
+            string name = "";
+            foreach (string given in GivenNames)
+            {
+                name += given +' ';
+            }
+            return name + LastName;
         }
     }
 }

@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccessor.cs" />
     <Compile Include="Name.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
