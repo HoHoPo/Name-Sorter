@@ -8,8 +8,8 @@ namespace nameSorterTests
     [TestClass]
     public class LoadDataTests
     {
-        string[] vaildPaths = { "test.txt" };
-        string invaildPath = "notFile.txt";
+        private readonly string[] vaildPaths = { "test.txt" };
+        private readonly string invaildPath = "notFile.txt";
 
         [TestMethod]
         public void BaseTest()
