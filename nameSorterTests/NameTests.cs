@@ -44,6 +44,19 @@ namespace nameSorterTests
             Assert.AreEqual(testName.LastName, "lastName", "Last Name incorrect");
         }
 
+        /// <summary>
+        /// testing to make sure extra spaces arnt inported
+        /// </summary>
+        [TestMethod]
+        public void ImportStringTestSpace()
+        {
+            Name testName = new Name(" given1 given2 given3 lastName ");
+            Assert.AreEqual(testName.GivenNames[0], "given1", "given1 incorrect");
+            Assert.AreEqual(testName.GivenNames[1], "given2", "given2 incorrect");
+            Assert.AreEqual(testName.GivenNames[2], "given3", "given3 incorrect");
+            Assert.AreEqual(testName.LastName, "lastName", "Last Name incorrect");
+        }
+
 
         /// <summary>
         /// test case for too many givenNames Provided

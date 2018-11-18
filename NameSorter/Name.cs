@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace NameSorter
 {
-
     /// <summary>
     /// Containts a name, with a last name and 1 to 3 given names
     /// </summary>
@@ -27,14 +26,8 @@ namespace NameSorter
         /// <param name="givenNames">Given Names to be used, must be between 1 and 3 </param>
         public Name(string lastName, string[] givenNames)
         {
-            if (VaildGivenNames(givenNames))
-            {
-                this.LastName = lastName;
-                this.GivenNames = givenNames;
-            }else
-            {
-                throw new System.ArgumentOutOfRangeException("givenNames", "givenNames must be between "+ minGivenNames +" and" + maxGivenNames);
-            }
+            this.ChangeGivenNames(givenNames);
+            this.ChangeLastName(lastName);
         }
 
         /// <summary>
@@ -43,19 +36,13 @@ namespace NameSorter
         /// <param name="fullName"> A string with space seperated parts, in order givenNames, LastName </param>
         public Name(string fullName)
         {
-            string[] splitNames = fullName.Split(' ');
+            string[] splitNames = fullName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             string[] possGivenNames = new string[splitNames.Length-1];
-            Array.Copy(splitNames, possGivenNames, splitNames.Length - 1);
-            if (VaildGivenNames(possGivenNames))
-            {
-                this.GivenNames = possGivenNames;
-                this.LastName = splitNames[splitNames.Length - 1];
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("givenNames", "givenNames must be between " + minGivenNames + " and" + maxGivenNames);
 
-            }
+            Array.Copy(splitNames, possGivenNames, splitNames.Length - 1);
+
+            this.ChangeGivenNames(possGivenNames);
+            this.ChangeLastName(splitNames[splitNames.Length - 1]);
         }
 
         /// <summary>
